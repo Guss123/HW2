@@ -3,6 +3,37 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
   end
+  
+  def updateform
+  end
+  def custupdate 
+    @guss = Movie.find_by(title: params[:movie][:origtitle])
+    if (@guss == nil)
+      @lol = "No Such title"
+    else 
+      @guss.update_attributes!(movie_params.reject{|k,v| v.blank?})
+      flash[:notice] = "#{@guss.title} was successfully updated."
+      redirect_to movies_updateform_path
+    end
+    
+  end
+  
+  def delform
+  end
+  
+  def custdel
+    if params[:choose][:tr] == 'title'
+      @guss = Movie.where(title: params[:movie][:query])
+    else 
+      @guss = Movie.where(rating: params[:movie][:query])
+    end
+    if (@guss == nil)
+      @lol = 'No such movie(s)'
+    else
+    @guss.destroy_all
+    redirect_to movies_path
+    end
+  end
 
   def show
     id = params[:id] # retrieve movie ID from URI route

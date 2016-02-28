@@ -1,0 +1,10 @@
+%h1 Edit Movie(s) by name or rating
+
+= form_tag :method => :put do
+  
+  = select(:choose, :tr, options_for_select([["title", "title"], ["rating", "rating"]]))
+  
+  = label :movie, :query, 'Enter'
+  = text_field :movie, 'query'
+
+  = submit_tag 'Delete Movie'

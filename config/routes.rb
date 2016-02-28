@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'movies#index'
+  
+  get 'movies/updateform' => 'movies#updateform'
+  post 'movies/updateform' => 'movies#custupdate'
+  
+  get 'movies/delform' => 'movies#delform'
+  post 'movies/delform' => 'movies#custdel'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

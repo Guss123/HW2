@@ -1,0 +1,17 @@
+%h1 Edit a Movie
+
+= form_tag :method => :put do
+
+  = label :movie, :title, 'Original Title'
+  = text_field :movie, 'origtitle'
+  
+  = label :movie, :title, 'New Title'
+  = text_field :movie, 'title'
+
+  = label :movie, :rating, 'Rating'
+  = text_field :movie, 'rating'
+
+  = label :movie, :release_date, 'Released On'
+  = text_field :movie, 'release_date'
+
+  = submit_tag 'Update Movie Info'
