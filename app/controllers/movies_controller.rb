@@ -49,6 +49,7 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     end
     @styl = "hilite"
+    @all_ratings = Movie.all_ratings
   end
 
   def new
