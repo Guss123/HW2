@@ -42,18 +42,26 @@ class MoviesController < ApplicationController
   end
 
   def index
-    
     if params[:sort_param] == "title" || params[:sort_param] == "release_date"
     @movies = Movie.all.order("#{params[:sort_param]} ASC")
+    session[:sort_param] = params[:sort_param]
+    elsif session[:sort_param] == "title" || session[:sort_param] == "release_date"
+    @movies = Movie.all.order("#{session[:sort_param]} ASC")
     else
     @movies = Movie.all
     end
     @styl = "hilite"
     @all_ratings = Movie.all_ratings
-    if params[:ratings] == nil
+    if params[:ratings] == nil && session[:ratings] == nil
+     # flash[:notice] = "if"
       @filterness = @all_ratings
-    else
+    elsif params[:ratings] != nil
+    flash[:notice] = "elsif"
       @filterness = params[:ratings].keys
+      session[:ratings] = params[:ratings]
+    else 
+     # flash[:notice] = "else"
+      @filterness = session[:ratings].keys
     end
     @movies = @movies.where(rating: @filterness)
   end
