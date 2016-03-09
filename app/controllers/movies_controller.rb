@@ -50,6 +50,12 @@ class MoviesController < ApplicationController
     end
     @styl = "hilite"
     @all_ratings = Movie.all_ratings
+    if params[:ratings] == nil
+      @filterness = @all_ratings
+    else
+      @filterness = params[:ratings].keys
+    end
+    @movies = @movies.where(rating: @filterness)
   end
 
   def new

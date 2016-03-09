@@ -14,12 +14,14 @@
         %td= movie.rating
         %td= movie.release_date
         %td= link_to "More about #{movie.title}", movie_path(movie)
-  = form_tag movies_path, :method => :get do
-    Include: 
-    - @all_ratings.each do |rating|
-      = rating
-      = check_box_tag "ratings[#{rating}]"
-    = submit_tag 'Refresh'
+  
+= form_tag movies_path, :method => :get, :id=>"ratings_form" do
+  Include: 
+  - @all_ratings.each do |rating|
+    = rating
+    = check_box_tag "ratings[#{rating}]", '1', @filterness.include?(rating), :id=> "ratings_#{rating}"
+  = submit_tag 'Refresh', :id=>"ratings_submit"
+    
 
 = link_to 'Add new movie', new_movie_path
 = link_to 'Update a movie', movies_updateform_path
